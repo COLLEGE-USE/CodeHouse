@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CodeHouse Room</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-info">
+            <span class="bar-item">Room: <strong id="roomName">Loading...</strong></span>
+            <span class="bar-item" id="topIdBox">ID: <strong id="roomId"></strong>
+                <button id="copyIdButton" class="btn btn-small" type="button">Copy</button>
+            </span>
+
+            <span class="bar-item">Time left: <strong id="timeLeft" class="time-text">--:--:--</strong></span>
+            <span class="bar-item" id="guestName" hidden></span>
+            <span class="badge" id="roleBadge"></span>
+            <span class="bar-item"><span id="connDot" class="dot"></span><span id="connText">Connecting...</span></span>
+        </div>
+        <div class="topbar-actions">
+            <button id="leaveButton" class="btn" type="button">&larr; Leave</button>
+            <button id="themeToggle" class="btn" type="button">Light</button>
+            <button id="closeButton" class="btn btn-danger" type="button" hidden>Close Room &rarr;</button>
+        </div>
+    </header>
+
+    <main class="page page-wide">
+        <div id="status" class="status" hidden></div>
+
+        <div id="closeConfirm" class="status error confirm-bar" hidden>
+            <span>Close this room permanently? Everyone is removed and all code is deleted.</span>
+            <button id="closeYes" class="btn btn-danger" type="button">Yes, close room</button>
+            <button id="closeNo" class="btn" type="button">Cancel</button>
+        </div>
+
+        <div id="layout" class="layout">
+            <aside id="sidePanel" class="side-panel" hidden>
+                
+                <section class="panel access-card">
+                    <h2>Room access</h2>
+                    <div class="access-block">
+                        <span class="access-label">Room ID</span>
+                        <div class="access-value">
+                            <strong id="accessIdText" class="access-text"></strong>
+                            <button id="accessCopyIdButton" class="btn btn-small" type="button">Copy</button>
+                        </div>
+                    </div>
+                    <div id="passwordBox" class="access-block" hidden>
+                        <span class="access-label">Password</span>
+                        <div class="access-value">
+                            <strong id="passwordText" class="access-text password-text"></strong>
+                            <button id="togglePasswordButton" class="btn btn-small btn-fixed" type="button">Show</button>
+                            <button id="copyPasswordButton" class="btn btn-small" type="button">Copy</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2>Room time</h2>
+                    <button id="changeTimeButton" class="btn btn-small" type="button">Change Time</button>
+                    <div id="timeForm" hidden>
+                        <div id="timeChips" class="chip-row">
+                            <button class="chip" type="button" data-minutes="60">1h</button>
+                            <button class="chip" type="button" data-minutes="120">2h</button>
+                            <button class="chip" type="button" data-minutes="360">6h</button>
+                            <button class="chip" type="button" data-minutes="720">12h</button>
+                            <button class="chip" type="button" data-minutes="1440">24h</button>
+                            <button class="chip" type="button" data-minutes="custom">Custom</button>
+                        </div>
+                        <div id="customTime" class="time-inputs" hidden>
+                            <input id="customHours" type="number" min="0" max="168" placeholder="0">
+                            <span>h</span>
+                            <input id="customMinutes" type="number" min="0" max="59" placeholder="0">
+                            <span>m</span>
+                        </div>
+                        <div class="button-row">
+                            <button id="setTimeButton" class="btn btn-primary btn-small" type="button" disabled>Set time</button>
+                            <button id="cancelTimeButton" class="btn btn-small" type="button">Cancel</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="panel">
+                    <h2>Online (<span id="onlineCount">0</span>)</h2>
+                    <ul id="onlineList" class="online-list"></ul>
+                    <button id="seeAllButton" class="btn btn-small" type="button" hidden>See all</button>
+                </section>
+            </aside>
+
+            <div class="content">
+                <div id="toolbar" class="toolbar" hidden>
+                    <button id="addEditorButton" class="btn btn-primary" type="button">+ Add Editor</button>
+                    <button id="deleteAllButton" class="btn btn-danger" type="button" hidden>Delete All Editors</button>
+                </div>
+
+                <div id="deleteAllConfirm" class="status error confirm-bar" hidden>
+                    <span>Delete every code editor in this room? This cannot be undone.</span>
+                    <button id="deleteAllYes" class="btn btn-danger" type="button">Yes, delete all</button>
+                    <button id="deleteAllNo" class="btn" type="button">Cancel</button>
+                </div>
+
+                <p id="noEditors" class="empty-note" hidden>No code editors yet.</p>
+                <div id="editorGrid" class="editor-grid"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/dashboard.js"></script>
+</body>
+</html>

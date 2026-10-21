@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CodeHouse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <h1 class="logo">CodeHouse</h1>
+        <button id="themeToggle" class="btn" type="button">Light</button>
+    </header>
+
+    <main class="page">
+        <div id="status" class="status" hidden></div>
+
+        <section class="panel">
+            <h2>Create Room</h2>
+            <form id="createForm" class="row" autocomplete="off">
+                <input id="createName" type="text" placeholder="Room name" maxlength="10" required>
+                <input id="createPassword" type="password" placeholder="Password (optional)" maxlength="10">
+                <button class="btn btn-primary" type="submit">Create Room</button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Join Room</h2>
+            <form id="joinForm" class="row" autocomplete="off">
+                <input id="joinId" type="text" placeholder="Room ID" maxlength="4" required>
+                <input id="joinPassword" type="password" placeholder="Password" maxlength="10">
+                <button class="btn btn-primary" type="submit">Join Room</button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Your Rooms</h2>
+            <p id="roomsEmpty" class="empty-note" hidden>You have not joined any rooms yet.</p>
+            <div class="table-wrap">
+                <table id="roomsTable" class="rooms-table" hidden>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Room ID</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Time left</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roomsBody"></tbody>
+                </table>
+            </div>
+        </section>
+        
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
